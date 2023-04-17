@@ -1,4 +1,4 @@
-name: Pipeline for Timeoff - Project
+name: Testing Loading Env from file
 
 on:
   push:
@@ -22,20 +22,5 @@ jobs:
         shell: bash
         run: cat dev.env >> $GITHUB_ENV
         if: github.ref == 'refs/heads/dev'
-      - name: Testing Environment variables
-        run: echo $WHERE $SCARE # Use the environment variables loaded from the environment file
-
-
-      # - name: Set environment variables
-      #   run: |
-      #     if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
-      #         echo "WHERE=prod" >> "$GITHUB_ENV"
-      #         echo "SCARE=true" >> "$GITHUB_ENV"
-      #         source prod.env
-      #     else
-      #         echo "WHERE=dev" >> "$GITHUB_ENV"
-      #         echo "SCARE=false" >> "$GITHUB_ENV"
-      #         source dev.env
-      #     fi
-      # - name: Using the environment variables
-      #   run: echo "I am in $WHERE and the answer it is $SCARE that I am scared"
+      - name: Testing Environment variables - SL
+        run: echo $WHERE $SCARE
