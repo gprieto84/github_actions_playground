@@ -1,0 +1,26 @@
+name: Pipeline for Timeoff - Project
+
+on:
+  push:
+    branches:
+      - "main"
+      - "dev"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set environment variables
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+              echo "ENV_FILE=prod.env" >> "$GITHUB_ENV"
+          else
+              echo "ENV_FILE=dev.env" >> "$GITHUB_ENV"
+          fi
+          source ENV_FILE
+      - name: Using the environment variables
+        run: |
+          echo $WHERE
+          echo $SCARE
