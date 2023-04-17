@@ -15,10 +15,7 @@ jobs:
       - name: Import environment variables from a file
         id: import-env
         shell: bash
-        run: |
-          while read line; do
-            echo "$line" >> $GITHUB_ENV
-          done < ${{ dev.env }}
+        run: cat dev.env >> $GITHUB_ENV
       - name: Use environment variables
         run: echo $WHERE $SCARE # Use the environment variables loaded from the environment file
 
