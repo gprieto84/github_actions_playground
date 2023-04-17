@@ -12,13 +12,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Loading
-        if: startsWith(github.ref, 'refs/heads/dev')
-        env:
-          ENV_FILE: dev.env
+      - name: Import environment variables from a file
+        id: import-env
+        shell: bash
         run: |
-          source $ENV_FILE
-          echo "Loaded environment variables from $ENV_FILE"
+          while read line; do
+            echo "$line" >> $GITHUB_ENV
+          done < ${{ dev.env }}
       - name: Use environment variables
         run: echo $WHERE $SCARE # Use the environment variables loaded from the environment file
 
