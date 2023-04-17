@@ -22,5 +22,5 @@ jobs:
         shell: bash
         run: cat dev.env >> $GITHUB_ENV
         if: github.ref == 'refs/heads/dev'
-      - name: Testing Environment variables - SL
+      - name: Testing Environment variables - SL (Integration)
         run: echo $WHERE $SCARE
