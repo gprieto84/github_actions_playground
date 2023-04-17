@@ -16,10 +16,11 @@ jobs:
         run: |
           if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
               echo "ENV_FILE=prod.env" >> "$GITHUB_ENV"
+              source prod.env
           else
               echo "ENV_FILE=dev.env" >> "$GITHUB_ENV"
+              source dev.env
           fi
-          source ENV_FILE
       - name: Using the environment variables
         run: |
           echo $WHERE
