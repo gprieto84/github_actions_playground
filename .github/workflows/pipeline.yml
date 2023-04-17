@@ -22,6 +22,4 @@ jobs:
               source dev.env
           fi
       - name: Using the environment variables
-        run: |
-          echo $WHERE
-          echo $SCARE
+        run: echo "I am in $WHERE and the answer it is $SCARE that I am scared"
