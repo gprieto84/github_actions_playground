@@ -5,7 +5,6 @@ on:
     types: [opened]
 
 permissions:
-  id-tokens: write
   issues: write
 
 jobs:
