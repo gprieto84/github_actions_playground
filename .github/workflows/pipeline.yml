@@ -22,5 +22,10 @@ jobs:
         shell: bash
         run: cat dev.env >> $GITHUB_ENV
         if: github.ref == 'refs/heads/dev'
+      - name: Import environment variables from a file - DEV
+        id: import-env-integration
+        shell: bash
+        run: cat dev.env >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/integration'
       - name: Testing Environment variables - SL (Integration)
-        run: echo $WHERE $SCARE
+        run: echo $WHERE $SCARE ${{github.ref}}
