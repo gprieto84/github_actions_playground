@@ -5,6 +5,11 @@ on:
     branches:
       - "main"
       - "dev"
+  pull_request:
+
+env:
+  WHERE: default
+  SCARE: default
 
 jobs:
   build:
