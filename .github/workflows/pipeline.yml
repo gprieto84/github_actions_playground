@@ -7,6 +7,10 @@ on:
       - "dev"
   pull_request:
 
+env:
+  WHERE: default
+  SCARE: default
+
 jobs:
   build:
     runs-on: ubuntu-latest
