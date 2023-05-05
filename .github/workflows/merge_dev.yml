@@ -1,0 +1,17 @@
+name: "Deploy on Comment"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy
+        run: |
+          echo "Deploying... ref:${{github.ref}}  comment:${{github.event.comment.body}} is_pr:${{github.event.issue.pull_request}}"
