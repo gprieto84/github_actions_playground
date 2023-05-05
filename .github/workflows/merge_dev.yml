@@ -3,15 +3,15 @@ name: "Deploy on Comment"
 on:
   issue_comment:
     types: [created]
-# && contains(github.event.comment.body, '/unleash the kraken')
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.issue.pull_request
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Deploy
         run: |
-          echo "Deploying... ${{github.ref}}  ${{github.event.comment.body}}"
+          echo "Deploying... ref:${{github.ref}}  comment:${{github.event.comment.body}} is_pr:${{github.event.issue.pull_request}}"
