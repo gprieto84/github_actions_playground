@@ -14,4 +14,4 @@ jobs:
 
       - name: Deploy
         run: |
-          echo "Deploying... ref:${{github.ref}}  comment:${{github.event.comment.body}} is_pr:${{github.event.issue.pull_request}}"
+          echo "Deploying 123... ref:${{github.ref}}  comment:${{github.event.comment.body}} is_pr:${{github.event.issue.pull_request}}"
