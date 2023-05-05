@@ -7,11 +7,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     steps:
-      - name: Checkout
+      - name: Get PR branch
+        uses: xt0rted/pull-request-comment-branch@v1
+        id: comment-branch
+
+      - name: Checkout PR branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.comment-branch.outputs.head_ref }}
 
       - name: Deploy
         run: |
-          echo "Deploying 123... ref:${{github.ref}}  comment:${{github.event.comment.body}} is_pr:${{github.event.issue.pull_request}}"
+          echo "Deploying...from ${{steps.comment-branch.outputs.head_ref}}"
