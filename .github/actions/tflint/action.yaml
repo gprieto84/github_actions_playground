@@ -1,0 +1,31 @@
+name: "terragrunt plan and apply"
+description: terragrunt validate and apply terraform
+
+runs:
+  using: "composite"
+  steps:
+    # Obtain Terraform CLI and Select terraform version
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.4.5
+
+    # Obtain Terragrunt CLI and Select terragrunt version
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v3
+      with:
+        tflint_version: v0.44.1
+
+    - name: Init TFLint
+      shell: bash
+      run: cd modules && tflint --init
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run TFLint
+      shell: bash
+      run: cd modules && tflint --recursive -f compact
+
+    - name: Validate Final
+      shell: bash
+      run: echo 'Great'
