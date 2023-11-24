@@ -1,0 +1,33 @@
+name: Testing Loading Env from file
+
+on:
+  push:
+    tags:
+      - 'prod-be**'
+      - 'hotfix-prod-be**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Print Git Tag
+        run: git describe --tags
+
+      - name: Print Current Branch
+        run: echo ${{ github.ref }}
+
+      # Only release from prod branch
+      - name: Validate main branch
+        if: endsWith(github.event.base_ref, 'main-be') == false
+        run: exit -1
+
+      - name: Validate Everything
+        shell: bash
+        run: echo 'Great'
