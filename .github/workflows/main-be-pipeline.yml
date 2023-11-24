@@ -17,11 +17,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Print Git Tag
-        run: git describe --tags
+      - name: Set Git Tag
+        run: echo "GIT_TAG=$(git describe --tags)" >> $GITHUB_ENV
 
       - name: Print Current Branch
         run: echo ${{ github.ref }}
+
+      - name: Print Current Branch II
+        run: echo ${{ github.event.base_ref }}
+
+      - name: Print Current Branch III
+        run: echo ${{ github.ref_name }}
 
       # Only release from prod branch
       - name: Validate main branch
@@ -31,3 +37,9 @@ jobs:
       - name: Validate Everything
         shell: bash
         run: echo 'Great'
+
+      - name: Print IMAGE_TAG
+        env:
+          IMAGE_TAG: ${{ env.GIT_TAG }}
+        run: |
+          echo $IMAGE_TAG
