@@ -40,6 +40,6 @@ jobs:
 
       - name: Print IMAGE_TAG
         env:
-          IMAGE_TAG: ${{ env.GIT_TAG }}
+          IMAGE_TAG: ${{ github.ref_name }}
         run: |
           echo $IMAGE_TAG
